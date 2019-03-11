@@ -43,7 +43,7 @@ it('should handle form change', () => {
 it('should set error to true when required form input submitted with no value', () => {
 	const ff = shallow(<FormField inputs={inputs}/>);
 	ff.instance().handleFormChange('FIRST NAME', '');
-	ff.instance().handleFormSubmit({preventDefault: jest.fn()});
+	ff.instance().handleFormSubmit({preventDefault: jest.fn(), 'persist': jest.fn()});
 	var state = ff.instance().state['FIRST NAME'];
 
 	expect( state.value ).toEqual( '' );
@@ -52,18 +52,18 @@ it('should set error to true when required form input submitted with no value', 
 
 it('should check inputs correctly', () => {
  	const ff = shallow(<FormField inputs={inputs}/>);
- 	const spy = jest.spyOn( ff.instance(), 'requirementsMet');
- 	ff.instance().handleFormSubmit({preventDefault: jest.fn()});
+ 	const spy = jest.spyOn( ff.instance(), 'inputErrors');
+ 	ff.instance().handleFormSubmit({preventDefault: jest.fn(), 'persist': jest.fn()});
 
- 	expect( spy ).toHaveReturnedWith( [false, false, false, true] );
+ 	expect( spy ).toHaveReturnedWith( [true, true, true, false] );
 });
 
 it('should fail validation when required inputs are empty', () => {
 	window.alert = jest.fn();
   	const ff = shallow(<FormField inputs={inputs}/>);
-  	ff.instance().handleFormSubmit({preventDefault: jest.fn()});
+  	ff.instance().handleFormSubmit({preventDefault: jest.fn(), 'persist': jest.fn()});
 
-  	expect( global.alert ).not.toHaveBeenCalled();
+  	expect( window.alert ).not.toHaveBeenCalled();
 });
 
 it('should pass validation when no inputs are required', () => {
@@ -87,7 +87,7 @@ it('should pass validation when no inputs are required', () => {
 		}
 	];
   	const ff = shallow(<FormField inputs={inputs}/>);
-  	ff.instance().handleFormSubmit({preventDefault: jest.fn()});
+  	ff.instance().handleFormSubmit({preventDefault: jest.fn(), 'persist': jest.fn()});
 
-  	expect( global.alert ).toHaveBeenCalled();
+  	expect( window.alert ).toHaveBeenCalled();
 });

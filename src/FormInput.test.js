@@ -10,6 +10,7 @@ beforeEach( () => {
 
 	blankInput = <FormInput
 					key={0}
+					val={1234567890}
 	        		title={""}
 	        		required={true}
 	        		error={false}
@@ -27,8 +28,7 @@ it('should render without crashing', () => {
 it('should call handleChange prop on change', () => {
 	const div = document.createElement('div');
 	const fi = ReactDOM.render(blankInput, div);
-	fi._inputElement.value = 'test';
-	fi.handleChange();
+	fi.handleChange({target: { value: 'test'}});
 
 	expect( onChange ).toHaveBeenCalled();
 	ReactDOM.unmountComponentAtNode(div);
@@ -53,6 +53,7 @@ it('should not have "error" class in inputClasses when this.prop.error = false',
 it('should have "error" class in inputClasses when this.prop.error = true', () => {
  	const fi = shallow(<FormInput
 							key={0}
+							val={1234567890}
 			        		title={""}
 			        		required={true}
 			        		error={true}
@@ -64,32 +65,22 @@ it('should have "error" class in inputClasses when this.prop.error = true', () =
 	expect( inputClasses ).toEqual( expect.stringContaining('error') );
 });
 
-it('should trim input value when pressing enter', () => {
-	const div = document.createElement('div');
-	const fi = ReactDOM.render(blankInput, div);
-	fi._inputElement.value = '    test';
-	fi.onKeyDown({which: 13});
+it('should mask input', () => {
+	const fi = shallow(<FormInput
+							key={0}
+							val={1234567890}
+			        		title={""}
+			        		required={true}
+			        		mask={true}
+			        		error={true}
+			        		onChange={onChange}
+			        		onSubmit={onSubmit}
+		    			/>);
 
-	expect( fi._inputElement.value ).toEqual( 'test' );
-	ReactDOM.unmountComponentAtNode(div);
+	const spy = jest.spyOn( fi.instance(), 'maskInput');
+	fi.instance().handleChange({target: { value: '1234567890'}});
+
+	expect( spy ).toHaveBeenCalled();
+	expect( spy ).toHaveReturnedWith( '(123) 456-7890' );
 });
 
-it('should trim input value when pressing tab', () => {
-	const div = document.createElement('div');
-	const fi = ReactDOM.render(blankInput, div);
-	fi._inputElement.value = '    test';
-	fi.onKeyDown({which: 9});
-
-	expect( fi._inputElement.value ).toEqual( 'test' );
-	ReactDOM.unmountComponentAtNode(div);
-});
-
-it('should not trim input value when pressing other keys', () => {
-	const div = document.createElement('div');
-	const fi = ReactDOM.render(blankInput, div);
-	fi._inputElement.value = '    test';
-	fi.onKeyDown({which: 10});
-
-	expect( fi._inputElement.value ).toEqual( '    test' );
-	ReactDOM.unmountComponentAtNode(div);
-});

@@ -43,22 +43,21 @@ class FormField extends Component {
 			}
 		});
 
-		this.setState( newState, this.checkRequirements(e) );
+		e.persist();
+		this.setState( newState, () => {
+			var allRequirementsMet = !this.inputErrors().includes(true);
+
+			// If all requirements met, submit form, else prevent form submission
+			if( allRequirementsMet ) {
+				this.alertData();
+			} else {
+				e.preventDefault();
+			}
+		});
 	}
 
-	checkRequirements = e => {
-		var allRequirementsMet = !this.requirementsMet().includes(false);
-
-		// If all requirements met, submit form, else prevent form submission
-		if( allRequirementsMet ) {
-			this.alertData();
-		} else {
-			e.preventDefault();
-		}
-	}
-
-	// Create truth array for input validation
-	requirementsMet = () => {
+	// Create truth array for input validation based on input errors
+	inputErrors = () => {
 		return this.props.inputs.map( (field) => {
 			return this.state[field.title].error;
 		});
