@@ -1,0 +1,18 @@
+.input-header {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Merriweather-Regular';
+  color: #666666;
+  font-size: 12px;
+  padding: 0 0 8px 0;
+}
+
+.required-text {
+  visibility: hidden;
+  color: #E70000;
+  padding-left: 5px;
+}
+
+.required-text.visible {
+  visibility: visible;
+}

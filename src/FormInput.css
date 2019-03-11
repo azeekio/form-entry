@@ -1,0 +1,40 @@
+.entry-field .form-input:last-child {
+  padding-bottom: 48px;
+}
+
+.entry-field .form-input {
+  padding-bottom: 24px;
+}
+
+.input {
+  font-family: 'Roboto-Regular';
+  font-size: 14px;
+  height: 48px;
+  width: 342px;
+  border: 1px solid #EAEAEA;
+  background-color: #F7F7F7;
+  padding: 0 16px 0 16px;
+}
+
+.input.active {
+  outline: none;
+  background-color: #FFFFFF;
+  border: 1px solid #00ADEE;
+}
+
+.input.error {
+  outline: none;
+  background-color: #FFFFFF;
+  border: 1px solid #E70000;
+}
+
+@media screen and (max-width: 890px) {
+  .input {
+    height: 48px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    border: 1px solid #EAEAEA;
+    background-color: #F7F7F7;
+    padding: 0 16px 0 16px;
+  }
+}

@@ -1,0 +1,45 @@
+.form-field {
+  padding: 105px 24px 0 24px;
+  width: 376px;
+}
+
+.btn-next {
+  cursor: pointer;
+  font-family: 'Roboto-Bold';
+  font-weight: bold;
+  font-size: 16px;
+  height: 48px;
+  padding: 0 24px 0 24px;
+  background-color: #FFAB44;
+  border: none;
+}
+
+.btn-next:focus {
+  outline: none;
+  box-shadow: 0 0 0 1pt #00ADEE;
+}
+
+.btn-next .right-arrow {
+  display: inline-flex;
+  background: transparent url('./Assets/White_Arrow.svg') top left no-repeat;;
+  height: 10px;
+  width: 10px;
+  margin: 0 0 0 8px;
+}
+
+.radius6 {
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 890px) {
+  .form-field {
+    padding: 32px 5% 0 5%;
+    width: auto;
+  }
+
+  .btn-next {
+    margin-bottom: 30px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+  }
+}

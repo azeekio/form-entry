@@ -1,0 +1,64 @@
+.page-left {
+  display: flex;
+  flex-flow: column;
+  font-family: 'Merriweather-Regular';
+  font-size: 14px;
+  color: #EAEAEA;
+  height: 100%;
+  width: 55%;
+}
+
+.flex-column {
+  justify-content: flex-start;
+  width: 455px;
+  padding-right: 80px;
+}
+
+.bg-left {
+  position: absolute;
+  background-color: #585858;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.welcome-text {
+  font-family: 'Roboto-Bold', sans-serif;
+  font-size: 32px;
+  padding-bottom: 16px;
+}
+
+.white-text {
+  color: #FFFFFF;
+}
+
+.logo {
+  margin: 32px 0 32px 0;
+  height: 26px;
+  width: 177px;
+  background-image: url('./Assets/GiantRobotLTD_Logo.svg');
+}
+
+@media screen and (max-width: 890px) {
+  .flex-column {
+    width: 100%;
+    margin: 0;
+  }
+
+  .welcome-text {
+    font-size: 24px;
+  }
+
+  .page-left {
+    width: 90%;
+  }
+
+  .page-left .flex-column {
+    padding: 0 5% 32px 5%;
+  }
+}
